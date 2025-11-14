@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nmap Port List Converter</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔍 Nmap Port List Converter</h1>
+        <p class="subtitle">自動提取 port 並生成完整的 nmap 掃描指令</p>
+
+        <div class="info">
+            <strong>使用說明：</strong> 貼上 nmap 掃描結果（包含 PORT 和 STATE 欄位），系統會自動提取所有開放的 port 並生成詳細掃描指令。
+        </div>
+
+        <div class="input-group">
+            <label for="scanResult">📋 Nmap 掃描結果：</label>
+            <textarea id="scanResult" rows="12" placeholder="貼上你的 nmap 掃描結果，例如：
+PORT      STATE SERVICE
+80/tcp    open  http
+135/tcp   open  msrpc
+..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label for="targetHost">🎯 目標主機：</label>
+            <input type="text" id="targetHost" value="cyberlens.thm" placeholder="例如：cyberlens.thm 或 192.168.1.1">
+        </div>
+
+        <div class="button-group">
+            <button class="btn-convert" onclick="convertPorts()">🚀 轉換</button>
+            <button class="btn-copy" onclick="copyCommand()">📋 複製指令</button>
+            <button class="btn-clear" onclick="clearAll()">🗑️ 清除</button>
+        </div>
+
+        <div class="input-group">
+            <label>⚡ 生成的 Nmap 指令：</label>
+            <div class="output-box" id="output">等待輸入...</div>
+        </div>
+
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat-item">
+                <div class="stat-value" id="portCount">0</div>
+                <div class="stat-label">開放的 Ports</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="serviceCount">0</div>
+                <div class="stat-label">已識別服務</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">✅ 指令已複製到剪貼簿！</div>
+
+
+</body>
+<script src="src/script.js"></script>
+
+</html>
